@@ -485,7 +485,7 @@ select.fi{appearance:none;cursor:pointer;}
   <h2>Welcome to AgroVest!</h2>
   <p>Your account is ready. Your welcome bonus has been added.</p>
   <div class="bonus-card">
-    <div class="bonus-lbl">🎁 Registration Successful</div>
+    <div class="bonus-lbl">🎁 Welcome Bonus</div>
     <div class="bonus-amt">50 Birr</div>
     <div class="bonus-sub">Added instantly to your wallet</div>
   </div>
@@ -577,12 +577,7 @@ select.fi{appearance:none;cursor:pointer;}
           </div>
           <span class="item-label" style="font-size:12px;">Cash gift</span>
         </div>
-        <div class="grid-item" onclick="openLuckyDraw()">
-          <div class="icon-wrap" style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#3D1A6B,#5B2D8A);">
-            <svg width="24" height="24" viewBox="0 0 24 24"><text x="2" y="20" font-size="18">🎰</text></svg>
-          </div>
-          <span class="item-label" style="font-size:12px;color:#3D1A6B;font-weight:700;">Lucky Draw</span>
-        </div>
+        <div class="grid-item" onclick="om('hcm')">
           <div class="icon-wrap iw-amber" style="width:44px;height:44px;border-radius:12px;">
             <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="#C8860A" opacity=".5"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#C8860A" stroke-width="2" fill="none"/><circle cx="18" cy="6" r="3" fill="#C8860A"/><path d="M16.5 6h3M18 4.5v3" stroke="#fff" stroke-width="1.2"/></svg>
           </div>
@@ -704,25 +699,13 @@ select.fi{appearance:none;cursor:pointer;}
       <div class="isb"><div class="isv" id="is-c">0</div><div class="isl">Confirmed</div></div>
       <div class="isb"><div class="isv" id="is-e">0</div><div class="isl">Earned ₿</div></div>
     </div>
-
-    <!-- ══ REFERRAL NOTICE ══ -->
-    <div style="margin:0 16px 14px;background:linear-gradient(135deg,#FFF8E0,#FFF3CC);border-radius:14px;padding:14px 16px;border:1.5px solid #F0C040;">
-      <div style="font-size:14px;font-weight:800;color:#C8860A;margin-bottom:8px;">📢 About Your Referral Bonus</div>
-      <div style="font-size:12px;color:#5A4A00;line-height:1.9;">
-        <div>✅ When someone registers via your link → <strong>+50 Birr is credited</strong></div>
-        <div>✅ When they recharge → you earn <strong>10% commission automatically</strong></div>
-        <div>⚠️ If your count shows 0 — tap <strong>🔄 Sync Now</strong> below to update</div>
-        <div>⚠️ Your friend must use <strong>YOUR link</strong> when registering</div>
-      </div>
-    </div>
-
     <!-- Firebase sync button -->
     <div style="margin:0 16px 14px;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#E8F5EE,#D4EDE1);border-radius:12px;padding:12px 16px;border:1.5px solid #B7DFCC;">
       <div style="flex:1;">
-        <div style="font-size:13px;font-weight:700;color:var(--green);">🔄 Referral count not showing?</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Tap Sync Now to fetch all registrations from server</div>
+        <div style="font-size:13px;font-weight:700;color:var(--green);">🔔 Referral count not updated?</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Tap Sync to fetch latest registrations from server</div>
       </div>
-      <button onclick="syncAndShow(this)" style="background:var(--green);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">🔄 Sync Now</button>
+      <button onclick="var btn=this;btn.disabled=true;btn.textContent='⏳ Syncing...';fbSyncMyReferrals().finally(function(){btn.disabled=false;btn.textContent='🔄 Sync Now';})" style="background:var(--green);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">🔄 Sync Now</button>
     </div>
 
     <!-- My Referrals List -->
@@ -750,10 +733,9 @@ select.fi{appearance:none;cursor:pointer;}
       <div class="menu-item" onclick="om('scm')"><div class="menu-ico">🔒</div><div class="menu-txt"><div class="menu-title">Security</div><div class="menu-sub">Change your password</div></div><div class="menu-arr">›</div></div>
       <div class="menu-item" onclick="sw('wealth')"><div class="menu-ico">🧾</div><div class="menu-txt"><div class="menu-title">Transaction History</div><div class="menu-sub">All deposits &amp; withdrawals</div></div><div class="menu-arr">›</div></div>
       <div class="menu-item" onclick="om('bkm')"><div class="menu-ico">💳</div><div class="menu-txt"><div class="menu-title">Bank Account</div><div class="menu-sub">Save withdrawal account</div></div><div class="menu-arr">›</div></div>
-      <div class="menu-item" onclick="openContract()"><div class="menu-ico">📋</div><div class="menu-txt"><div class="menu-title" style="color:#8B1A1A;">Employment Contract</div><div class="menu-sub">1-Year Agreement — Download & Print</div></div><div class="menu-arr" style="color:#8B1A1A;">›</div></div>
       <div class="menu-item" onclick="window.open('https://t.me/agrovaultmanager','_blank')"><div class="menu-ico">❓</div><div class="menu-txt"><div class="menu-title">Help &amp; Support</div><div class="menu-sub">@agrovaultmanager on Telegram</div></div><div class="menu-arr">›</div></div>
       <div class="menu-item" onclick="window.open('https://t.me/agrovault','_blank')"><div class="menu-ico">👥</div><div class="menu-txt"><div class="menu-title">Official Group</div><div class="menu-sub">@agrovault — Join our community</div></div><div class="menu-arr">›</div></div>
-      <div class="menu-item" onclick="openAdmin();" style="border-top:2px dashed var(--border);margin-top:8px;"><div class="menu-ico">🔑</div><div class="menu-txt"><div class="menu-title" style="color:var(--green);">Admin Panel</div><div class="menu-sub">System management &amp; control</div></div><div class="menu-arr" style="color:var(--green);">›</div></div>
+      <div class="menu-item" onclick="location.href='#admin';setTimeout(function(){var w=document.getElementById('admin-wrap');if(w){w.style.cssText='display:block!important;position:fixed;inset:0;z-index:99999;overflow-y:auto;background:#ECEAE3;';var sess=localStorage.getItem('av4_admin_sess');var s=sess?JSON.parse(sess):'';if(s==='admin@agrovest.app'||s==='ok'){document.getElementById('adm-app').style.display='block';document.getElementById('adm-login').style.display='none';if(typeof aLoadOv==='function')aLoadOv();if(typeof aLoadDeps==='function')aLoadDeps();if(typeof aLoadWits==='function')aLoadWits();}else{document.getElementById('adm-login').style.display='flex';document.getElementById('adm-app').style.display='none';}}},100);" style="border-top:2px dashed var(--border);margin-top:8px;"><div class="menu-ico">🔑</div><div class="menu-txt"><div class="menu-title" style="color:var(--green);">Admin Panel</div><div class="menu-sub">System management &amp; control</div></div><div class="menu-arr" style="color:var(--green);">›</div></div>
       <div class="menu-item" onclick="doOut()"><div class="menu-ico">🚪</div><div class="menu-txt"><div class="menu-title">Sign Out</div><div class="menu-sub">Log out of account</div></div><div class="menu-arr">›</div></div>
     </div>
     <div style="height:14px;"></div>
@@ -888,130 +870,6 @@ select.fi{appearance:none;cursor:pointer;}
       </div>
     </div>
     <button class="sbtn" onclick="window.open('https://t.me/agrovaultmanager','_blank')">💬 Chat with Support on Telegram</button>
-  </div>
-</div>
-
-<!-- CONTRACT AGREEMENT MODAL -->
-<div class="mo" id="contract-mo" onclick="cmo(event,'contract-mo')">
-  <div class="msheet"><div class="mhandle"></div><button class="mclose" onclick="cm('contract-mo')">✕</button>
-    <div class="mtitle">📋 Terms & Agreement</div>
-    <div style="background:linear-gradient(135deg,#1B4332,#2D6A4F);border-radius:14px;padding:16px;margin-bottom:14px;text-align:center;">
-      <div style="font-size:36px;margin-bottom:6px;">☕</div>
-      <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:#fff;">AgroVest User Agreement</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.75);margin-top:4px;">Please read and accept before registering</div>
-    </div>
-    <div style="background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;border:1.5px solid var(--border);max-height:300px;overflow-y:auto;">
-      <div style="font-size:13px;color:#333;line-height:1.9;">
-        <div style="font-weight:800;color:#1B4332;margin-bottom:8px;">1. Platform Overview</div>
-        <p style="margin-bottom:10px;">AgroVest is a digital agricultural investment platform operating in Ethiopia. By registering, you agree to all terms stated in this agreement.</p>
-        <div style="font-weight:800;color:#1B4332;margin-bottom:8px;">2. Investment Rules</div>
-        <p style="margin-bottom:10px;">• Minimum recharge: 1,000 Birr<br/>• Minimum withdrawal: 200 Birr<br/>• Withdrawal fee: 20%<br/>• Daily income must be claimed manually each day<br/>• Investments are non-refundable once activated</p>
-        <div style="font-weight:800;color:#1B4332;margin-bottom:8px;">3. Working Hours</div>
-        <p style="margin-bottom:10px;">• Monday – Saturday: 10:00 AM – 6:00 PM<br/>• No withdrawals on Sundays<br/>• Only one withdrawal per day is allowed</p>
-        <div style="font-weight:800;color:#1B4332;margin-bottom:8px;">4. Account Rules</div>
-        <p style="margin-bottom:10px;">• One phone number = one account only<br/>• You are responsible for keeping your password safe<br/>• AgroVest is not responsible for lost passwords shared with others</p>
-        <div style="font-weight:800;color:#1B4332;margin-bottom:8px;">5. Referral Commission</div>
-        <p style="margin-bottom:10px;">• You earn 50 Birr for each person who registers via your link<br/>• 3-level commission: 10% / 2% / 1% on each recharge<br/>• Commissions are credited automatically</p>
-        <div style="font-weight:800;color:#1B4332;margin-bottom:8px;">6. Disclaimer</div>
-        <p style="margin-bottom:10px;">AgroVest reserves the right to suspend accounts that violate platform rules. All investment decisions are made voluntarily by the user.</p>
-        <div style="font-weight:800;color:#C8860A;margin-bottom:8px;">7. Agreement</div>
-        <p>By tapping "I Agree & Register" below, you confirm that you have read, understood, and agree to all terms and conditions of AgroVest.</p>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;background:#E8F5EE;border-radius:10px;padding:12px;margin-bottom:14px;border:1.5px solid #B7DFCC;">
-      <input type="checkbox" id="agree-check" style="width:20px;height:20px;cursor:pointer;accent-color:#1B4332;"/>
-      <label for="agree-check" style="font-size:13px;font-weight:700;color:#1B4332;cursor:pointer;">I have read and agree to all terms & conditions</label>
-    </div>
-    <button class="sbtn" onclick="acceptContract()" style="background:#1B4332;">✅ I Agree & Register</button>
-    <button class="sbtn" onclick="cm('contract-mo')" style="background:transparent;color:#888;border:1.5px solid #ddd;margin-top:8px;">← Back</button>
-  </div>
-</div>
-
-<!-- EMPLOYMENT CONTRACT MODAL -->
-<div class="mo" id="emp-contract" onclick="cmo(event,'emp-contract')">
-  <div class="msheet"><div class="mhandle"></div><button class="mclose" onclick="cm('emp-contract')">✕</button>
-    <div class="mtitle">📋 Employment Contract</div>
-    <div id="contract-content">
-      <div style="background:linear-gradient(135deg,#8B1A1A,#6B1010);border-radius:14px;padding:16px;margin-bottom:14px;text-align:center;">
-        <div style="font-size:32px;margin-bottom:6px;">☕</div>
-        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:#fff;">AgroVest</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.8);">1-Year Employment Agreement</div>
-      </div>
-      <div style="background:#fff;border-radius:12px;padding:14px;border:1.5px solid var(--border);margin-bottom:12px;" id="contract-body">
-        <div style="text-align:center;margin-bottom:12px;">
-          <!-- Photo box -->
-          <div id="photo-box" style="width:80px;height:80px;border-radius:50%;background:#F2EDE4;border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;cursor:pointer;font-size:28px;" onclick="document.getElementById('photo-input').click()">📷</div>
-          <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="loadPhoto(this)"/>
-          <div style="font-size:11px;color:var(--muted);">Tap to add photo</div>
-        </div>
-        <div id="contract-text" style="font-size:12px;color:#333;line-height:2;">
-          <div style="text-align:center;font-weight:800;font-size:14px;margin-bottom:8px;">EMPLOYMENT AGREEMENT</div>
-          <div><strong>Employee Name:</strong> <span id="ct-name">—</span></div>
-          <div><strong>Phone Number:</strong> <span id="ct-phone">—</span></div>
-          <div><strong>Employee ID:</strong> <span id="ct-uid">—</span></div>
-          <div><strong>Start Date:</strong> <span id="ct-start">—</span></div>
-          <div><strong>End Date:</strong> <span id="ct-end">—</span></div>
-          <div style="margin-top:10px;font-weight:800;color:#8B1A1A;">Terms & Conditions:</div>
-          <div style="margin-top:6px;">
-            1. The employee agrees to work with AgroVest for a period of <strong>1 (one) year</strong> from the start date above.<br/>
-            2. The employee will actively promote the AgroVest platform and invite new members.<br/>
-            3. Commission structure: 10% (Level 1) · 5% (Level 2) · 2% (Level 3) on each recharge.<br/>
-            4. The employee agrees to maintain customer privacy and data security.<br/>
-            5. The employee may not share confidential information about the platform.<br/>
-            6. AgroVest reserves the right to terminate employment for rule violations.<br/>
-            7. All earnings must be withdrawn within the platform's working hours (Mon–Sat, 10AM–6PM).<br/>
-            8. This agreement is governed by the laws of the Federal Democratic Republic of Ethiopia.
-          </div>
-          <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div style="text-align:center;">
-              <div style="border-bottom:1px solid #333;margin-bottom:4px;height:30px;"></div>
-              <div style="font-size:10px;color:#666;">Employee Signature</div>
-            </div>
-            <div style="text-align:center;">
-              <div style="border-bottom:1px solid #333;margin-bottom:4px;height:30px;"></div>
-              <div style="font-size:10px;color:#666;">AgroVest Management</div>
-            </div>
-          </div>
-          <div style="text-align:center;margin-top:10px;font-size:10px;color:#888;">agrovest.et · @agrovault · © 2026 AgroVest Ethiopia</div>
-        </div>
-      </div>
-      <button class="sbtn" onclick="printContract()" style="background:#8B1A1A;">🖨️ Print / Save Contract</button>
-    </div>
-  </div>
-</div>
-
-<!-- LUCKY DRAW MODAL -->
-<div class="mo" id="lucky-draw" onclick="cmo(event,'lucky-draw')">
-  <div class="msheet"><div class="mhandle"></div><button class="mclose" onclick="cm('lucky-draw')">✕</button>
-    <div class="mtitle">🎰 Lucky Draw</div>
-    <div style="background:linear-gradient(135deg,#3D1A6B,#5B2D8A);border-radius:16px;padding:20px;margin-bottom:16px;text-align:center;">
-      <div style="font-size:48px;margin-bottom:8px;">🎰</div>
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#fff;">VIP Lucky Draw</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.8);margin-top:4px;">Exclusive for AMD5 & AMD6 investors</div>
-      <div style="background:rgba(255,255,255,.15);border-radius:12px;padding:8px;margin-top:10px;">
-        <div style="font-size:12px;color:#FFD700;font-weight:700;">🏆 Grand Prize: 1,000 Birr</div>
-      </div>
-    </div>
-    <!-- Eligibility check -->
-    <div id="draw-eligibility" style="display:none;"></div>
-    <!-- Draw wheel -->
-    <div id="draw-section" style="display:none;">
-      <div style="text-align:center;margin-bottom:16px;">
-        <div id="draw-wheel" style="width:200px;height:200px;margin:0 auto;border-radius:50%;background:conic-gradient(#3D1A6B 0deg 60deg,#C8860A 60deg 120deg,#1B4332 120deg 180deg,#8B1A1A 180deg 240deg,#3D1A6B 240deg 300deg,#C8860A 300deg 360deg);display:flex;align-items:center;justify-content:center;font-size:40px;transition:transform 3s cubic-bezier(.17,.67,.12,.99);position:relative;border:6px solid #D4AF37;cursor:pointer;" onclick="spinDraw()">
-          <div style="position:absolute;font-size:20px;top:-16px;">▼</div>
-          <div id="wheel-emoji">🎰</div>
-        </div>
-        <div id="draw-result" style="margin-top:16px;min-height:50px;"></div>
-      </div>
-      <button id="draw-btn" class="sbtn" style="background:linear-gradient(135deg,#3D1A6B,#5B2D8A);" onclick="spinDraw()">🎰 Spin the Wheel!</button>
-      <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px;" id="draw-count-info"></div>
-    </div>
-    <!-- Not eligible -->
-    <div id="draw-not-eligible" style="background:#FFE5E5;border-radius:12px;padding:16px;text-align:center;display:none;">
-      <div style="font-size:32px;margin-bottom:8px;">💎</div>
-      <div style="font-size:14px;font-weight:700;color:#8B1A1A;margin-bottom:6px;">VIP Only Feature</div>
-      <div style="font-size:12px;color:#555;line-height:1.7;">Lucky Draw is exclusive for AMD5 (31,000 Birr) or AMD6 (64,000 Birr) investors.<br/>Upgrade your plan to unlock this feature!</div>
-    </div>
   </div>
 </div>
 
@@ -1514,7 +1372,7 @@ async function fbSyncMyReferrals() {
   renderMyReferrals();
 
   if (added > 0) {
-    toast('🎉 ' + added + ' new member' + (added > 1 ? 's' : '') + ' found! Bonus paid when they recharge.');
+    toast('🎉 ' + added + ' new referral' + (added > 1 ? 's' : '') + '! +' + (added * 50) + ' Birr credited!');
   } else {
     toast('✅ ' + refs.length + ' referral' + (refs.length !== 1 ? 's' : '') + ' total — all counted!');
   }
@@ -1646,148 +1504,6 @@ async function getIP(){
   }catch{return 'unknown';}
 }
 
-// ── SYNC AND SHOW DETAILED RESULT ──
-async function syncAndShow(btn){
-  btn.disabled=true;btn.textContent='⏳ Syncing...';
-  await fbSyncMyReferrals();
-  btn.disabled=false;btn.textContent='🔄 Sync Now';
-  // Show detailed result
-  const u=window._u;if(!u)return;
-  const refs=u.referrals||[];
-  const count=u.confirmed||0;
-  const earned=u.earnedRefs||0;
-  if(count>0){
-    toast('✅ '+count+' referral'+(count>1?'s':'')+' found! You earned '+earned.toLocaleString()+' Birr');
-  } else {
-    // Show helpful message
-    const link=getBase()+'?ref='+u.phone;
-    toast('ℹ️ No referrals yet. Share: '+link);
-  }
-}
-
-// ── EMPLOYMENT CONTRACT ──
-function openContract(){
-  const u=window._u;if(!u)return;
-  document.getElementById('ct-name').textContent=u.name;
-  document.getElementById('ct-phone').textContent=u.phone;
-  document.getElementById('ct-uid').textContent=u.uid;
-  const start=new Date();
-  const end=new Date(start);end.setFullYear(end.getFullYear()+1);
-  document.getElementById('ct-start').textContent=start.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('ct-end').textContent=end.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  om('emp-contract');
-}
-function loadPhoto(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=function(e){
-    const box=document.getElementById('photo-box');
-    box.innerHTML='<img src="'+e.target.result+'" style="width:80px;height:80px;border-radius:50%;object-fit:cover;"/>';
-  };
-  reader.readAsDataURL(file);
-}
-function printContract(){
-  const body=document.getElementById('contract-body').innerHTML;
-  const win=window.open('','_blank');
-  win.document.write('<html><head><title>AgroVest Employment Contract</title></head><body style="font-family:Georgia,serif;padding:30px;max-width:600px;margin:0 auto;">'+body+'</body></html>');
-  win.document.close();win.focus();win.print();
-}
-
-// ── LUCKY DRAW ──
-var _drawSpun=false;
-function openLuckyDraw(){
-  const u=window._u;if(!u)return;
-  const hasVip=(u.activePlans||[]).some(p=>p.pkg==='amd5'||p.pkg==='amd6');
-  const elig=document.getElementById('draw-eligibility');
-  const section=document.getElementById('draw-section');
-  const notElig=document.getElementById('draw-not-eligible');
-  elig.style.display='none';
-  if(!hasVip){
-    section.style.display='none';
-    notElig.style.display='block';
-  } else {
-    section.style.display='block';
-    notElig.style.display='none';
-    const spunKey='av4_draw_'+u.uid+'_'+new Date().toDateString();
-    const alreadySpun=localStorage.getItem(spunKey);
-    const btn=document.getElementById('draw-btn');
-    const info=document.getElementById('draw-count-info');
-    if(alreadySpun){
-      btn.disabled=true;btn.textContent='✅ Already spun today';btn.style.background='#ccc';
-      info.textContent='Come back tomorrow for another chance!';
-    } else {
-      btn.disabled=false;btn.textContent='🎰 Spin the Wheel!';btn.style.background='linear-gradient(135deg,#3D1A6B,#5B2D8A)';
-      info.textContent='1 spin per day — AMD5/AMD6 holders only';
-    }
-    document.getElementById('draw-result').innerHTML='';
-    document.getElementById('draw-wheel').style.transform='rotate(0deg)';
-  }
-  om('lucky-draw');
-}
-function spinDraw(){
-  const u=window._u;if(!u)return;
-  const spunKey='av4_draw_'+u.uid+'_'+new Date().toDateString();
-  if(localStorage.getItem(spunKey)){toast('⚠️ Already spun today! Come back tomorrow.');return;}
-  const btn=document.getElementById('draw-btn');
-  const wheel=document.getElementById('draw-wheel');
-  const res=document.getElementById('draw-result');
-  btn.disabled=true;btn.textContent='⏳ Spinning...';
-  // Spin animation
-  const deg=1440+Math.floor(Math.random()*360);
-  wheel.style.transform='rotate('+deg+'deg)';
-  // Prizes: 20% chance of 1000 Birr, 30% 200 Birr, 50% 50 Birr
-  const rand=Math.random();
-  let prize=0,msg='';
-  if(rand<0.10){prize=1000;msg='🏆 JACKPOT! You won 1,000 Birr!';}
-  else if(rand<0.28){prize=500;msg='🎉 Amazing! You won 500 Birr!';}
-  else if(rand<0.45){prize=200;msg='🥳 You won 200 Birr!';}
-  else if(rand<0.75){prize=100;msg='😊 You won 100 Birr!';}
-  else{prize=50;msg='👍 You won 50 Birr!';}
-  setTimeout(function(){
-    // Credit prize
-    const us=S.g('users')||{};
-    const me=us[u.uid];
-    if(me){
-      me.balance=(me.balance||0)+prize;
-      me.txns=me.txns||[];
-      me.txns.unshift({id:'draw'+Date.now(),type:'bonus',amt:prize,desc:'🎰 Lucky Draw Win: '+prize+' Birr',status:'approved',date:nowStr()});
-      us[u.uid]=me;S.s('users',us);window._u=me;
-      updBal(me.balance);renderTx();
-    }
-    localStorage.setItem(spunKey,'1');
-    res.innerHTML='<div style="background:linear-gradient(135deg,#3D1A6B,#5B2D8A);border-radius:14px;padding:16px;text-align:center;">'
-      +'<div style="font-size:36px;margin-bottom:6px;">'+(prize>=1000?'🏆':prize>=500?'🎉':prize>=200?'🥳':'😊')+'</div>'
-      +'<div style="font-family:\'Playfair Display\',serif;font-size:22px;font-weight:800;color:#FFD700;">+'+prize+' Birr!</div>'
-      +'<div style="font-size:13px;color:rgba(255,255,255,.9);margin-top:4px;">'+msg+'</div>'
-      +'</div>';
-    btn.textContent='✅ Come back tomorrow!';btn.style.background='#1B4332';
-    document.getElementById('draw-count-info').textContent='Next spin available tomorrow';
-    toast(msg);
-  },3000);
-}
-
-// ── CONTRACT AGREEMENT ──
-function showContract(){
-  // Validate form first
-  const name=document.getElementById('rn').value.trim();
-  const phone=document.getElementById('rp').value.trim();
-  const pass=document.getElementById('rpw').value;
-  const pass2=document.getElementById('rpw2').value;
-  if(!name){toast('⚠️ Enter your full name');return;}
-  if(!phone||phone.length<7){toast('⚠️ Enter a valid phone number');return;}
-  if(!pass||pass.length<6){toast('⚠️ Password must be at least 6 characters');return;}
-  if(pass!==pass2){toast('⚠️ Passwords do not match');return;}
-  document.getElementById('agree-check').checked=false;
-  om('contract-mo');
-}
-function acceptContract(){
-  if(!document.getElementById('agree-check').checked){
-    toast('⚠️ Please tick the checkbox to agree to terms');return;
-  }
-  cm('contract-mo');
-  doReg();
-}
-
 // ── REGISTER ──
 async function doReg(){
   const name=document.getElementById('rn').value.trim();
@@ -1827,7 +1543,7 @@ async function doReg(){
   const now=Date.now();
   const u={
     uid,name,phone,pass,
-    balance:0,
+    balance:50,
     ref:ref||null,
     refBy:ref||null,
     joined:now,
@@ -1835,7 +1551,7 @@ async function doReg(){
     ip:ip,
     invited:0,confirmed:0,earnedRefs:0,
     tasks:{},checkins:[],plans:0,todayEarned:0,
-    txns:[],
+    txns:[{id:'w1',type:'bonus',amt:50,desc:'🎁 Welcome Bonus',status:'approved',date:nowStr()}],
     bankAccount:null,
     activePlans:[]
   };
@@ -1843,11 +1559,20 @@ async function doReg(){
   if(ref){
     const r=Object.values(us).find(x=>x.uid===ref||x.phone===ref);
     if(r){
-      // Track referral — bonus paid when friend RECHARGES (not on signup)
+      // Referrer IS on this same device — credit immediately
+      r.balance=(r.balance||0)+50;
       r.invited=(r.invited||0)+1;
       r.confirmed=(r.confirmed||0)+1;
+      r.earnedRefs=(r.earnedRefs||0)+50;
+      r.txns=r.txns||[];
+      r.txns.unshift({
+        id:'rf'+Date.now(),type:'referral',amt:50,
+        desc:'🔗 Referral Bonus — '+name+' ('+phone+')',
+        status:'approved',date:nowStr(),
+        refUid:uid,refName:name,refPhone:phone,refIP:ip
+      });
       r.referrals=r.referrals||[];
-      r.referrals.push({uid,name,phone,ip,joined:nowStr(),bonus:0,paid:false});
+      r.referrals.push({uid,name,phone,ip,joined:nowStr(),bonus:50});
       us[r.uid]=r;
       refOk=true;
     }
@@ -1872,18 +1597,13 @@ async function doReg(){
 
 // ── LOGIN ──
 async function doLog(){
-  const phone=document.getElementById('lp').value.trim().replace(/\s+/g,'');
+  const phone=document.getElementById('lp').value.trim();
   const pass=document.getElementById('lpw').value;
   if(!phone||!pass){toast('⚠️ Fill in all fields');return;}
   
   // First check localStorage
   let us=S.g('users')||{};
-  // Try multiple phone formats
-  let u=Object.values(us).find(x=>{
-    const p=phone.replace(/^0/,'').replace(/^\+251/,'').replace(/^251/,'');
-    const xp=(x.phone||'').replace(/^0/,'').replace(/^\+251/,'').replace(/^251/,'');
-    return xp===p && x.pass===pass;
-  });
+  let u=Object.values(us).find(x=>x.phone===phone&&x.pass===pass);
   
   if(!u){
     // Not found locally — try Firebase
@@ -1893,11 +1613,7 @@ async function doLog(){
       if(r.ok){
         const data=await r.json();
         if(data&&typeof data==='object'){
-          const found=Object.values(data).find(x=>{
-              const p=phone.replace(/^0/,'').replace(/^\+251/,'').replace(/^251/,'');
-              const xp=(x.phone||'').replace(/^0/,'').replace(/^\+251/,'').replace(/^251/,'');
-              return xp===p && x.pass===pass;
-            });
+          const found=Object.values(data).find(x=>x.phone===phone&&x.pass===pass);
           if(found){
             // Save to localStorage for future use
             us[found.uid]=found;
@@ -2456,7 +2172,7 @@ function cpL(){const l=document.getElementById('mylink').textContent;if(navigato
 function shL(){const l=document.getElementById('mylink').textContent;if(navigator.share)navigator.share({title:'Join AgroVest!',text:'🌾 Join me and earn 50 Birr signup bonus!',url:l}).then(()=>toast('Shared! 🎉')).catch(()=>cpL());else cpL();}
 
 // ── CASH GIFT ──
-async function claimGift(){
+function claimGift(){
   const u=window._u;if(!u)return;
   const code=document.getElementById('cg-code').value.trim().toUpperCase();
   const res=document.getElementById('cg-result');
@@ -2465,16 +2181,8 @@ async function claimGift(){
     res.innerHTML='<div style="background:#FFE5E5;border-radius:12px;padding:13px;color:var(--red);font-size:13px;font-weight:600;text-align:center;">⚠️ Please enter a valid gift code.</div>';
     res.style.display='block';return;
   }
-  // Check local first, then Firebase
-  var gifts=S.g('giftcodes')||{};
-  var gc=gifts[code];
-  if(!gc){
-    // Try to load from Firebase
-    try{
-      var fbr=await fetch(FB+'/giftcodes/'+code+'.json');
-      if(fbr.ok){var fbd=await fbr.json();if(fbd&&fbd.code){gc=fbd;gifts[code]=gc;S.s('giftcodes',gifts);}}
-    }catch(e){}
-  }
+  const gifts=S.g('giftcodes')||{};
+  const gc=gifts[code];
   if(!gc){
     res.innerHTML='<div style="background:#FFE5E5;border-radius:12px;padding:13px;color:var(--red);font-size:13px;font-weight:600;text-align:center;">❌ Invalid code. Please check and try again.</div>';
     res.style.display='block';return;
@@ -2497,13 +2205,6 @@ async function claimGift(){
   u.todayEarned=(u.todayEarned||0)+amt;
   gc.used=true;gc.usedBy=u.uid;gc.usedAt=nowStr();
   S.s('giftcodes',gifts);
-  // Push to Firebase so all devices can use them
-  try{
-    var gKeys=Object.keys(gifts);
-    gKeys.forEach(function(k){
-      fetch(FB+'/giftcodes/'+k+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(gifts[k])}).catch(function(){});
-    });
-  }catch(e){}
   saveU(u);updBal(u.balance);
   addTx('bonus',amt,'🎁 Cash Gift Code: '+code);
   document.getElementById('cg-code').value='';
@@ -2741,7 +2442,7 @@ function showNews(){toast('📢 Latest: Premium package earns 15% daily!');}
 </div>
 <script>
 const ADMIN_EMAIL='0928488477';
-const ADMIN_PASS='book123';
+const ADMIN_PASS='chane123';
 
 // Table helpers
 function aTH(cols){return '<thead><tr>'+cols.map(c=>'<th style="background:#F5F0E8;padding:10px 14px;font-size:11px;font-weight:700;color:#8A7E72;text-transform:uppercase;text-align:left;border-bottom:1.5px solid #D4C9B8;white-space:nowrap;">'+c+'</th>').join('')+'</tr></thead>';}
@@ -2759,42 +2460,35 @@ window.addEventListener('hashchange',function(){
 
 function openAdmin(){
   var wrap=document.getElementById('admin-wrap');
-  if(!wrap)return;
   wrap.style.cssText='display:block!important;position:fixed;inset:0;z-index:99999;overflow-y:auto;background:#ECEAE3;';
   document.body.style.overflow='hidden';
-  var isAdmin=localStorage.getItem('agv_adm')==='1';
-  if(isAdmin){
-    document.getElementById('adm-login').style.display='none';
-    document.getElementById('adm-app').style.display='block';
-    if(typeof aLoadOv==='function'){aLoadOv();aLoadDeps();aLoadWits();}
+  var sess=S.g('admin_sess');
+  if(sess==='ok'||sess==='admin@agrovest.app'){
+    showAdmApp();
   } else {
     document.getElementById('adm-login').style.display='flex';
     document.getElementById('adm-app').style.display='none';
   }
 }
 function exitAdmin(){
-  document.getElementById('admin-wrap').style.cssText='display:none!important;';
+  var wrap=document.getElementById('admin-wrap');
+  wrap.style.cssText='display:none!important;';
   document.body.style.overflow='';
   history.pushState('',document.title,window.location.pathname+window.location.search);
 }
-function adminOut(){
-  localStorage.removeItem('agv_adm');
-  document.getElementById('adm-login').style.display='flex';
-  document.getElementById('adm-app').style.display='none';
-  document.getElementById('apw').value='';
-}
+
 function adminLogin(){
   var pw=document.getElementById('apw').value.trim();
   var err=document.getElementById('aerr');
   err.style.display='none';
-  if(!pw){err.innerHTML='⚠️ Enter password.';err.style.display='block';return;}
-  if(pw.toLowerCase()===ADMIN_PASS.toLowerCase()){
-    localStorage.setItem('agv_adm','1');
+  if(!pw){err.textContent='⚠️ Please enter your password.';err.style.display='block';return;}
+  if(pw===ADMIN_PASS||pw===ADMIN_PASS.toLowerCase()||pw===ADMIN_PASS.toUpperCase()){
+    S.s('admin_sess','admin@agrovest.app');
     document.getElementById('adm-login').style.display='none';
     document.getElementById('adm-app').style.display='block';
     if(typeof aLoadOv==='function'){aLoadOv();aLoadDeps();aLoadWits();}
   } else {
-    err.innerHTML='❌ Wrong password. Try again.';
+    err.innerHTML='❌ Wrong password. Please try again.';
     err.style.display='block';
     document.getElementById('apw').value='';
     document.getElementById('apw').focus();
@@ -2803,7 +2497,13 @@ function adminLogin(){
 function showAdmApp(){
   document.getElementById('adm-login').style.display='none';
   document.getElementById('adm-app').style.display='block';
-  if(typeof aLoadOv==='function'){aLoadOv();aLoadDeps();aLoadWits();}
+  aLoadOv();aLoadDeps();aLoadWits();
+}
+function adminOut(){
+  S.d('admin_sess');
+  document.getElementById('adm-login').style.display='flex';
+  document.getElementById('adm-app').style.display='none';
+  document.getElementById('apw').value='';
 }
 function goATab(el,id){
   document.querySelectorAll('.atab').forEach(function(t){t.style.color='#8A7E72';t.style.borderBottom='3px solid transparent';});
@@ -2895,7 +2595,7 @@ function aApproveDep(depId){
     us[u.uid]=u;
 
     // 3-level commission
-    var levels=[{pct:0.10,label:'Level 1 (10%)'},{pct:0.05,label:'Level 2 (5%)'},{pct:0.02,label:'Level 3 (2%)'}];
+    var levels=[{pct:0.10,label:'Level 1 (10%)'},{pct:0.02,label:'Level 2 (2%)'},{pct:0.01,label:'Level 3 (1%)'}];
     var currentUid=u.refBy||u.ref;
     for(var lvl=0;lvl<3;lvl++){
       if(!currentUid)break;
@@ -2928,32 +2628,6 @@ function aApproveDep(depId){
       })
     }).catch(function(){});
 
-    // ── Credit referrer's signup bonus (+50) on FIRST recharge ──
-    if(!u._refBonusPaid && (u.refBy||u.ref)){
-      var refKey=u.refBy||u.ref;
-      // Find referrer in local storage
-      var referrerLocal=Object.values(us).find(function(x){return x.uid===refKey||x.phone===refKey;});
-      if(referrerLocal&&!u._refBonusPaid){
-        referrerLocal.balance=(referrerLocal.balance||0)+50;
-        referrerLocal.earnedRefs=(referrerLocal.earnedRefs||0)+50;
-        referrerLocal.txns=referrerLocal.txns||[];
-        referrerLocal.txns.unshift({id:'refb'+Date.now(),type:'referral',amt:50,desc:'🔗 Referral Bonus — '+u.name+' made first recharge!',status:'approved',date:notification.date});
-        // Update referral paid flag in referral list
-        if(referrerLocal.referrals){
-          var rIdx=referrerLocal.referrals.findIndex(function(r){return r.uid===u.uid;});
-          if(rIdx>=0) referrerLocal.referrals[rIdx].paid=true;
-        }
-        us[referrerLocal.uid]=referrerLocal;
-        // Send notification to referrer
-        fetch(FB+'/notifications/'+referrerLocal.uid+'/refb'+Date.now()+'.json',{
-          method:'PUT',headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({type:'deposit_approved',amt:50,depId:'refb',date:notification.date,ts:Date.now()})
-        }).catch(function(){});
-      }
-      u._refBonusPaid=true;
-      us[u.uid]=u;
-    }
-    S.s('users',us);
     toast('✅ '+d.amt.toLocaleString()+' Birr credited to '+u.name+' — they will see it when they open the app!');
   } else {
     toast('✅ Approved! User will be notified.');
@@ -3021,24 +2695,21 @@ function aRejectWit(witId){
 function aLoadUsers(){
   var us=S.g('users')||{};var tbl=document.getElementById('ausr-tbl');
   var arr=Object.values(us);
-  var head=aTH(['Name','Phone','Password','Bank Account','Balance','Plans','Referrals','IP','Joined']);
+  var head=aTH(['Name','Phone','Balance','Plans','Referred By','Referrals','IP Address','Joined']);
   if(!arr.length){tbl.innerHTML=head+'<tbody><tr><td colspan="8" style="text-align:center;padding:24px;color:#8A7E72;font-style:italic;">No users yet.</td></tr></tbody>';return;}
   tbl.innerHTML=head+'<tbody>'+arr.sort(function(a,b){return (b.joined||0)-(a.joined||0);}).map(function(u){
     var refByName='—';
     if(u.refBy){var ru=us[u.refBy];refByName=ru?'<span style="color:#1B4332;font-weight:700;">'+ru.name+'</span>':'<span style="font-size:11px;color:#8A7E72;">'+u.refBy+'</span>';}
     var refs=u.confirmed||0;
-    var bank=u.bankAccount?u.bankAccount.number+' ('+u.bankAccount.holder+')':'—';
-    var resetBtn='<button onclick="adminResetPassword(''+u.uid+'')" style="background:#FFE5E5;color:#C0392B;border:none;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;margin-top:3px;">🔑 Reset</button>';
     return '<tr>'
       +aTD('<strong>'+u.name+'</strong><br/><span style="font-size:10px;color:#8A7E72;font-family:monospace;">'+u.uid+'</span>')
       +aTD(u.phone)
-      +aTD('<span style="font-family:monospace;font-size:12px;background:#FFF8E0;padding:2px 6px;border-radius:4px;">'+u.pass+'</span><br/>'+resetBtn)
-      +aTD('<span style="font-size:11px;">'+bank+'</span>')
       +aTD('<strong style="color:#1B4332;">'+Math.round(u.balance||0).toLocaleString()+' ₿</strong>')
       +aTD(u.plans||0)
-      +aTD(refs>0?'<strong style="color:#1B4332;">'+refs+'</strong>':'0')
-      +aTD('<span style="font-family:monospace;font-size:10px;color:#8A7E72;">'+(u.ip||'—')+'</span>')
-      +aTD(u.joined?new Date(u.joined).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'—','font-size:11px;color:#8A7E72;')
+      +aTD(refByName)
+      +aTD(refs>0?'<strong style="color:#1B4332;">'+refs+'</strong> people':'0')
+      +aTD('<span style="font-family:monospace;font-size:11px;color:#8A7E72;">'+(u.ip||'—')+'</span>')
+      +aTD(u.joined?new Date(u.joined).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'—','font-size:12px;color:#8A7E72;')
       +'</tr>';
   }).join('')+'</tbody>';
 }
@@ -3163,20 +2834,6 @@ async function adminResyncFirebase(){
   toast('✅ Firebase sync complete! '+pushed+' referrals pushed.');
 }
 
-// ── ADMIN RESET USER PASSWORD ──
-function adminResetPassword(uid){
-  var newPass=prompt('Set new password for this user (min 6 chars):');
-  if(!newPass||newPass.length<6){toast('Password too short');return;}
-  var us=S.g('users')||{};
-  var u=us[uid];if(!u){toast('User not found');return;}
-  u.pass=newPass;
-  us[uid]=u;S.s('users',us);
-  // Push to Firebase
-  fetch(FB+'/allusers/'+uid+'.json',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({pass:newPass})}).catch(function(){});
-  toast('✅ Password reset to: '+newPass+' for '+u.name);
-  aLoadUsers();
-}
-
 function aAdjBal(){
   var phone=document.getElementById('aadj-ph').value.trim();
   var amt=parseInt(document.getElementById('aadj-amt').value);
@@ -3194,15 +2851,8 @@ function aAdjBal(){
   if(type==='credit')u.hasRecharged=true;
   u.txns=u.txns||[];u.txns.unshift({id:'adm'+Date.now(),type:'admin',amt:amt,desc:(type==='credit'?'+ Admin: ':' Admin: ')+note,status:'approved',date:new Date().toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})});
   us[u.uid]=u;S.s('users',us);
-  // Push notification to Firebase so user sees it instantly
-  var notifId='adj'+Date.now();
-  fetch(FB+'/notifications/'+u.uid+'/'+notifId+'.json',{
-    method:'PUT',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({type:'deposit_approved',amt:(type==='credit'?amt:0),depId:notifId,date:new Date().toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}),ts:Date.now()})
-  }).catch(function(){});
-  fetch(FB+'/allusers/'+u.uid+'.json',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({balance:u.balance,hasRecharged:u.hasRecharged})}).catch(function(){});
-  res.innerHTML='<div style="background:#E8F5EE;border-radius:10px;padding:13px;color:#1B4332;font-size:14px;font-weight:600;line-height:1.7;">'+(type==='credit'?'✅ Added':'✅ Deducted')+' '+amt.toLocaleString()+' Birr '+(type==='credit'?'to':'from')+' <strong>'+u.name+'</strong><br/>New balance: <strong>'+Math.round(u.balance).toLocaleString()+' Birr</strong><br/><span style="font-size:12px;color:#555;">User will see this change instantly on their phone!</span></div>';
-  res.style.display='block';toast('✅ Balance updated for '+u.name+'!');aLoadOv();
+  res.innerHTML='<div style="background:#E8F5EE;border-radius:10px;padding:13px;color:#1B4332;font-size:14px;font-weight:600;line-height:1.7;">'+(type==='credit'?'Added':'Deducted')+' '+amt.toLocaleString()+' Birr '+(type==='credit'?'to':'from')+' '+u.name+'<br/>New balance: '+Math.round(u.balance).toLocaleString()+' Birr</div>';
+  res.style.display='block';toast('Balance updated for '+u.name+'!');aLoadOv();
   document.getElementById('aadj-ph').value='';document.getElementById('aadj-amt').value='';document.getElementById('aadj-note').value='';
 }
 // ── GIFT CODES ──
